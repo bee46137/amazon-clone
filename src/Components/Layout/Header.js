@@ -1,33 +1,66 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom'
+import {useContext} from'react';
+import { Link } from 'react-router-dom'
 import "./Header.css";
+import SearchIcon from '@mui/icons-material/Search';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import ShoppingContext from '../../context/shopping/shoppingContext';
+import { auth } from '../../firebase'
+
 
 const Header = () => {
-  return (
-    <header className='header'>
-        <div className="logo-navbar">
-            <picture>
-                <img href= "../assets/logo"></img>
-            </picture>
-        </div>
-        <div className="searchbar-nav">
-            <input type="text" placeholder="Search Amazon..."></input>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-            </svg>
-        </div>
 
-        <nav>
-            <ul>
-                <li>
-                    <NavLink activeClassName="active" to="/Home">Home</NavLink>
-                </li>
-                <li>
-                    <NavLink activeClassName="active" to="/Products">Products</NavLink>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    const shoppingContext = useContext(ShoppingContext);
+    const { basket, user } = shoppingContext;
+
+    const handleAuthentication = () => {
+        if (user) {
+            auth.signOut();
+        }
+    }
+            return (    
+                <header className='header'>
+                <Link to='/Home'>
+                    <img  
+                    className='header-logo' 
+                    src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"            
+                    alt="Amazon Logo" 
+                    />
+                </Link>
+
+                <div className="header-search">
+                    <input className="header-input" type="text" placeholder="Search Amazon..."/>
+                    <SearchIcon className="search_icon" />
+                </div> 
+
+                <nav className="header-nav">
+                    <Link to={!user && '/Login'}>
+                        <div className='header-option' onClick={handleAuthentication}>
+                            <span className="header-option-1">Hello {!user ? 'Guest' : user.email}</span>
+                            <span className='header=option-2'>{user ? 'Sign Out' : 'Sign In'}</span>
+                        </div>
+                    </Link>
+                    <Link to="/ReturnsAndOrders">
+                        <div className='header-option'>
+                            <span className="header-option-1">Returns</span>
+                            <span className='header=option-2'>& Orders</span>
+                        </div>
+                    </Link>
+                    
+                        <div className='header-option'>
+                            <span className="header-option-1">Your</span>
+                            <span className='header=option-2'>Prime</span>
+                        </div>
+
+                    <Link to={user !==null? '/Checkout' : '/Login'}>
+                        <div className='header-option-basket'>
+                            <ShoppingBasketIcon className='shopping-icon'/>
+                            <span className='header-option-2 header-basket-count'>{basket?.length}</span>
+                        </div>
+                    </Link>
+                </nav>
+                </header>
+
   )
 };
 

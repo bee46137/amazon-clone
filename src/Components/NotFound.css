@@ -1,0 +1,16 @@
+.not-found {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+    background: white;
+    padding: 50px;
+}
+
+.not-found > img {
+    width: 50%;
+    height: auto;
+}
