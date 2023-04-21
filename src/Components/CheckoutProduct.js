@@ -15,38 +15,43 @@ const CheckoutProduct = ({ id, image, title, rating, price, hideButton }) => {
   return (
     <>
     <div className='checkout-product'>
-       <img
-        className='checkout-product-image' 
-        src={image}
-        alt=""
-        />
-        <div className='checkout-product-info'>
+      <div classname='checkout-product-left'>
+          <img
+            className='checkout-product-image' 
+            src={image}
+            alt=""
+            />
+      </div>
+       <div className='checkout-product-right'>
+            <div className='checkout-product-info'>
 
-            <p className='checkout-product-title'>
-                {title}
-            </p>
-            
-            <p className="checkout-product-price">
-                <p>
-                    <strong>{price}</strong>
-                    <big>$</big>
+                <p className='checkout-product-title'>
+                    {title}
                 </p>
-            </p>
+                
+                <p className="checkout-product-price">
+                    <p>
+                        <strong>{price}</strong>
+                        <big>$</big>
+                    </p>
+                </p>
 
-            <div className="checkout-product-rating">
-                    {Array(rating).fill().map((_, i) => (
-                    <p> ⭐️ </p>
-                    ))} 
-            </div>
+                <div className="checkout-product-rating">
+                        {Array(rating).fill().map((_, i) => (
+                        <p> ⭐️ </p>
+                        ))} 
+                </div>
 
-            {!hideButton && 
-            <button 
-              className='' 
-              onClick={removeFromBasketHandler}>
-                    Remove from basket
-            </button>}
+                {!hideButton && 
+                <button 
+                  className='' 
+                  onClick={removeFromBasketHandler}>
+                        Remove from basket
+                </button>}
 
-        </div>
+            </div>        
+       </div>
+        
     </div>
     </>
   )

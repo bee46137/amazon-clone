@@ -6,7 +6,8 @@
 }
 
 .checkout-ad {
-    width: 200px;
+    width: auto;
+    height: 10%;
     margin-bottom: 10px;
 }
 

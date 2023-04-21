@@ -43,7 +43,8 @@ export const ShoppingState = (props) => {
                 addToBasket,
                 setUser,
                 removeFromBasket,
-                }}>
+                }}
+        >
             {props.children}
         </ShoppingContext.Provider>)
 }

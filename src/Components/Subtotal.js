@@ -7,25 +7,26 @@ import ShoppingContext from '../context/shopping/shoppingContext';
 const Subtotal = () => {
 
     const shoppingContext = useContext(ShoppingContext);
-    const {basket, getBasketTotal} = shoppingContext
+    const { basket, getBasketTotal } = shoppingContext
 
   return (
     <div className='subtotal'>
-        <CurrencyFormat render={(value) => 
+        <CurrencyFormat renderText={(value) => 
                 <>
                     <p>
                         Subtotal ({basket?.length} items): <strong>{value}</strong>
                     </p>
-                    <small className='subtotal-gift'><input type='checkbox'/>
+                    <small className='subtotal-gift'>
+                      <input type='checkbox'/>
                         This order contains a gift
                     </small>
                 </>}
                 decimalScale={2}
                 value = {getBasketTotal(basket)}
-                displayType='text'
+                displayType={'text'}
                 prefix={'$'}
-                />
-                <button>Proceed to checkout</button>
+        />
+        <button>Proceed to checkout</button>
             
     </div>
   )
